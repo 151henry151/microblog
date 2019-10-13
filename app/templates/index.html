@@ -5,7 +5,11 @@
   <meta charset="UTF-8">
   <meta name="description" content="HTML Template">
   <meta name="author" content="Henry Romp">
+  {% if title %}
   <title>{{ title }} - Microblog</title>
+  {% else %}
+  <title>Welcome to Microblog!</title>
+  {% endif %}
 </head>
 
 <body>
