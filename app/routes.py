@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from app import render_template
+from flask import render_template
 from app import app
 
 @app.route('/')
