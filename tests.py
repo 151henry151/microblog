@@ -21,7 +21,7 @@ class UserModelCase(unittest.TestCase):
     def test_avater(self):
         u = User(username='john', email='john@example.com')
         self.assertEqual(u.avatar(128), ('https://www.gravatar.com/avatar/'
-                                        'd4c74594d841139328695856648b6bd6'
+                                        'd4c74594d841139328695756648b6bd6'
                                         '?d=identicon&s=128'))
     def test_follow(self):
         u1 = User(username='john', email='john@example.com')
@@ -37,8 +37,8 @@ class UserModelCase(unittest.TestCase):
         self.assertTrue(u1.is_following(u2))
         self.assertEqual(u1.followed.count(), 1)
         self.assertEqual(u1.followed.first().username, 'susan')
-        self.assertEqual(u1.followers.count(), 1)
-        self.assertEqual(u1.followers.first().username, 'john')
+        self.assertEqual(u2.followers.count(), 1)
+        self.assertEqual(u2.followers.first().username, 'john')
 
         u1.unfollow(u2)
         db.session.commit()
