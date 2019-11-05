@@ -1,4 +1,5 @@
 from flask_mail import Message
+from threading import Thread
 from app import mail
 
 def send_async_email(app, msg):
