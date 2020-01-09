@@ -70,3 +70,10 @@ WHERE user.username = ?
 (Background on this error at: http://sqlalche.me/e/e3q8)
 2020-01-09 16:30:09,249 INFO: Microblog startup [in /home/henry/workspace/microblog/app/__init__.py:52]
 2020-01-09 16:30:13,651 INFO: Microblog startup [in /home/henry/workspace/microblog/app/__init__.py:52]
+2020-01-09 16:43:58,645 INFO: Microblog startup [in /home/henry/workspace/henrysversion/microblog/app/__init__.py:52]
+2020-01-09 16:44:09,680 INFO: Microblog startup [in /home/henry/workspace/henrysversion/microblog/app/__init__.py:52]
+2020-01-09 16:44:15,550 INFO: Microblog startup [in /home/henry/workspace/henrysversion/microblog/app/__init__.py:52]
+2020-01-09 16:44:25,651 INFO: Microblog startup [in /home/henry/workspace/henrysversion/microblog/app/__init__.py:52]
+2020-01-09 16:44:33,915 INFO: Microblog startup [in /home/henry/workspace/henrysversion/microblog/app/__init__.py:52]
+2020-01-09 16:44:38,077 INFO: Microblog startup [in /home/henry/workspace/henrysversion/microblog/app/__init__.py:52]
+2020-01-09 16:44:41,379 INFO: Microblog startup [in /home/henry/workspace/henrysversion/microblog/app/__init__.py:52]
