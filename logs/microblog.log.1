@@ -1,4 +1,5 @@
-2020-01-09 16:27:40,740 ERROR: Exception on /register [POST] [in /home/henry/microblog/venv/lib/python3.7/site-packages/flask/app.py:1891]
+2020-01-09 23:31:20,305 INFO: Microblog startup [in /home/henry/workspace/henrysversion/microblog/app/__init__.py:52]
+2020-01-09 23:31:25,336 ERROR: Exception on /user/charlie@romp.network [GET] [in /home/henry/microblog/venv/lib/python3.7/site-packages/flask/app.py:1891]
 Traceback (most recent call last):
   File "/home/henry/microblog/venv/lib/python3.7/site-packages/sqlalchemy/engine/base.py", line 1249, in _execute_context
     cursor, statement, parameters, context
@@ -17,28 +18,36 @@ Traceback (most recent call last):
     reraise(exc_type, exc_value, tb)
   File "/home/henry/microblog/venv/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
     raise value
-  File "/home/henry/microblog/venv/lib/python3.7/site-packages/flask/app.py", line 1949, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/home/henry/microblog/venv/lib/python3.7/site-packages/flask/app.py", line 1935, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/home/henry/workspace/microblog/app/routes.py", line 88, in register
-    if form.validate_on_submit():
-  File "/home/henry/microblog/venv/lib/python3.7/site-packages/flask_wtf/form.py", line 101, in validate_on_submit
-    return self.is_submitted() and self.validate()
-  File "/home/henry/microblog/venv/lib/python3.7/site-packages/wtforms/form.py", line 310, in validate
-    return super(Form, self).validate(extra)
-  File "/home/henry/microblog/venv/lib/python3.7/site-packages/wtforms/form.py", line 152, in validate
-    if not field.validate(self, extra):
-  File "/home/henry/microblog/venv/lib/python3.7/site-packages/wtforms/fields/core.py", line 206, in validate
-    stop_validation = self._run_validation_chain(form, chain)
-  File "/home/henry/microblog/venv/lib/python3.7/site-packages/wtforms/fields/core.py", line 226, in _run_validation_chain
-    validator(form, self)
-  File "/home/henry/workspace/microblog/app/forms.py", line 27, in validate_username
-    user = User.query.filter_by(username=username.data).first()
-  File "/home/henry/microblog/venv/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 3240, in first
-    ret = list(self[0:1])
-  File "/home/henry/microblog/venv/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 3018, in __getitem__
-    return list(res)
+  File "/home/henry/microblog/venv/lib/python3.7/site-packages/flask/app.py", line 1947, in full_dispatch_request
+    rv = self.preprocess_request()
+  File "/home/henry/microblog/venv/lib/python3.7/site-packages/flask/app.py", line 2241, in preprocess_request
+    rv = func()
+  File "/home/henry/workspace/henrysversion/microblog/app/routes.py", line 18, in before_request
+    if current_user.is_authenticated:
+  File "/home/henry/microblog/venv/lib/python3.7/site-packages/werkzeug/local.py", line 348, in __getattr__
+    return getattr(self._get_current_object(), name)
+  File "/home/henry/microblog/venv/lib/python3.7/site-packages/werkzeug/local.py", line 307, in _get_current_object
+    return self.__local()
+  File "/home/henry/microblog/venv/lib/python3.7/site-packages/flask_login/utils.py", line 26, in <lambda>
+    current_user = LocalProxy(lambda: _get_user())
+  File "/home/henry/microblog/venv/lib/python3.7/site-packages/flask_login/utils.py", line 335, in _get_user
+    current_app.login_manager._load_user()
+  File "/home/henry/microblog/venv/lib/python3.7/site-packages/flask_login/login_manager.py", line 359, in _load_user
+    return self.reload_user()
+  File "/home/henry/microblog/venv/lib/python3.7/site-packages/flask_login/login_manager.py", line 321, in reload_user
+    user = self.user_callback(user_id)
+  File "/home/henry/workspace/henrysversion/microblog/app/models.py", line 81, in load_user
+    return User.query.get(int(id))
+  File "/home/henry/microblog/venv/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 959, in get
+    return self._get_impl(ident, loading.load_on_pk_identity)
+  File "/home/henry/microblog/venv/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 1069, in _get_impl
+    return db_load_fn(self, primary_key_identity)
+  File "/home/henry/microblog/venv/lib/python3.7/site-packages/sqlalchemy/orm/loading.py", line 282, in load_on_pk_identity
+    return q.one()
+  File "/home/henry/microblog/venv/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 3300, in one
+    ret = self.one_or_none()
+  File "/home/henry/microblog/venv/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 3269, in one_or_none
+    ret = list(self)
   File "/home/henry/microblog/venv/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 3342, in __iter__
     return self._execute_and_instances(context)
   File "/home/henry/microblog/venv/lib/python3.7/site-packages/sqlalchemy/orm/query.py", line 3367, in _execute_and_instances
@@ -64,10 +73,6 @@ Traceback (most recent call last):
 sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: user
 [SQL: SELECT user.id AS user_id, user.username AS user_username, user.email AS user_email, user.password_hash AS user_password_hash, user.about_me AS user_about_me, user.last_seen AS user_last_seen 
 FROM user 
-WHERE user.username = ?
- LIMIT ? OFFSET ?]
-[parameters: ('Henry', 1, 0)]
+WHERE user.id = ?]
+[parameters: (3,)]
 (Background on this error at: http://sqlalche.me/e/e3q8)
-2020-01-09 16:28:58,335 INFO: Microblog startup [in /home/henry/workspace/microblog/app/__init__.py:52]
-2020-01-09 16:29:17,501 INFO: Microblog startup [in /home/henry/workspace/microblog/app/__init__.py:52]
-2020-01-09 16:29:22,420 INFO: Microblog startup [in /home/henry/workspace/microblog/app/__init__.py:52]
