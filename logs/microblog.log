@@ -77,3 +77,5 @@ WHERE user.username = ?
 2020-01-09 16:44:33,915 INFO: Microblog startup [in /home/henry/workspace/henrysversion/microblog/app/__init__.py:52]
 2020-01-09 16:44:38,077 INFO: Microblog startup [in /home/henry/workspace/henrysversion/microblog/app/__init__.py:52]
 2020-01-09 16:44:41,379 INFO: Microblog startup [in /home/henry/workspace/henrysversion/microblog/app/__init__.py:52]
+2020-01-09 17:18:27,495 INFO: Microblog startup [in /home/henry/workspace/henrysversion/microblog/app/__init__.py:52]
+2020-01-09 17:18:52,882 INFO: Microblog startup [in /home/henry/workspace/henrysversion/microblog/app/__init__.py:52]
