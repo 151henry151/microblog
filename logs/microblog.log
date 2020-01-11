@@ -77,3 +77,5 @@ WHERE user.id = ?]
 (Background on this error at: http://sqlalche.me/e/e3q8)
 2020-01-09 23:31:40,591 INFO: Microblog startup [in /home/henry/workspace/henrysversion/microblog/app/__init__.py:52]
 2020-01-09 23:31:47,674 INFO: Microblog startup [in /home/henry/workspace/henrysversion/microblog/app/__init__.py:52]
+2020-01-11 09:45:27,583 INFO: Microblog startup [in /home/henry/workspace/henrysversion/microblog/app/__init__.py:74]
+2020-01-11 14:55:41,265 INFO: Microblog startup [in /home/henry/workspace/henrysversion/microblog/app/__init__.py:74]
