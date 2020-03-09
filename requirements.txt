@@ -40,3 +40,8 @@ WTForms==2.1
 # requirements for Heroku
 #psycopg2==2.7.3.1
 #gunicorn==19.7.1
+
+# production specific
+gunicorn>=20.0.4
+PyMySQL==0.9.3
+
