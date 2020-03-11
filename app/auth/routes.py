@@ -64,7 +64,7 @@ def two_factor_setup():
         'Cache-Control': 'no-cache, no-store, must-revalidate',
         'Pragma': 'no-cache',
         'Expires': '0'}
-
+    
 @bp.route('/qrcode')
 def qrcode():
     if 'username' not in session:
@@ -79,7 +79,7 @@ def qrcode():
     # render QR code for OTP auth
     url = pyqrcode.create(user.get_totp_uri())
     stream = BytesIO()
-    url.svg(stream, scale=5)
+    url.svg(stream, scale=3)
     return stream.getvalue(), 200, {
         'Content-Type': 'image/svg+xml',
         'Cache-Control': 'no-cache, no-store, must-revalidate',
