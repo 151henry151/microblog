@@ -65,7 +65,7 @@ def two_factor_setup():
         'Pragma': 'no-cache',
         'Expires': '0'}
 
-@app.route('/qrcode')
+@bp.route('/qrcode')
 def qrcode():
     if 'username' not in session:
         abort(404)
