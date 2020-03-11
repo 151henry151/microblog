@@ -45,10 +45,24 @@ def register():
         db.session.add(user)
         db.session.commit()
         flash(_('Congratulations, you are now a registered user!'))
-        return redirect(url_for('auth.login'))
+        session['username'] = user.username
+        return redirect(url_for('two_factor_setup'))
     return render_template('auth/register.html', title=_('Register'),
                            form=form)
 
+@bp.route('/twofactor')
+def two_factor_setup():
+    if 'username' not in session:
+        return redirect(url_for('index'))
+    user = User.query.filter_by(username=session['username']).first()
+    if user is None:
+        return redirect(url_for('index'))
+    # since this page contains the sensitive QR code, make sure the browser
+    # does not cache it
+    return render_template('two-factor-setup.html'), 200, {
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0'}
 
 @bp.route('/reset_password_request', methods=['GET', 'POST'])
 def reset_password_request():
