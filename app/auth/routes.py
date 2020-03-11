@@ -64,6 +64,27 @@ def two_factor_setup():
         'Pragma': 'no-cache',
         'Expires': '0'}
 
+@app.route('/qrcode')
+def qrcode():
+    if 'username' not in session:
+        abort(404)
+    user = User.query.filter_by(username=session['username']).first()
+    if user is None:
+        abort(404)
+
+    # for added security, remove username from session
+    del session['username']
+
+    # render QR code for OTP auth
+    url = pyqrcode.create(user.get_totp_uri())
+    stream = BytesIO()
+    url.svg(stream, scale=5)
+    return stream.getvalue(), 200, {
+        'Content-Type': 'image/svg+xml',
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0'}
+
 @bp.route('/reset_password_request', methods=['GET', 'POST'])
 def reset_password_request():
     if current_user.is_authenticated:
