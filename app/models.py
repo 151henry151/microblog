@@ -93,6 +93,7 @@ class User(UserMixin, PaginatedAPIMixin, db.Model):
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
+    otp_secret = db.Column(db.String(16))
     posts = db.relationship('Post', backref='author', lazy='dynamic')
     about_me = db.Column(db.String(140))
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
@@ -113,6 +114,12 @@ class User(UserMixin, PaginatedAPIMixin, db.Model):
     notifications = db.relationship('Notification', backref='user',
                                     lazy='dynamic')
     tasks = db.relationship('Task', backref='user', lazy='dynamic')
+
+    def __init__(self, **kwargs):
+        super(User, self).__init__(**kwargs)
+        if self.otp_secret is None:
+            # generate a random secret
+            self.otp_secret = base64.b32encode(os.urandom(10)).decode('utf-8')
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
@@ -233,7 +240,13 @@ class User(UserMixin, PaginatedAPIMixin, db.Model):
         if user is None or user.token_expiration < datetime.utcnow():
             return None
         return user
+    
+    def get_totp_uri(self):
+        return 'otpauth://totp/microblogger:{0}?secret={1}&issuer=microblogger' \
+            .format(self.username, self.otp_secret)
 
+    def verify_totp(self, token):
+        return onetimepass.valid_totp(token, self.otp_secret)
 
 @login.user_loader
 def load_user(id):
