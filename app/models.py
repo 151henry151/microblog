@@ -2,6 +2,7 @@ import base64
 from datetime import datetime, timedelta
 from hashlib import md5
 import json
+import onetimepass
 import os
 from time import time
 from flask import current_app, url_for
